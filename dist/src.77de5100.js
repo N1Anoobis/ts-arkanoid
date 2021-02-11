@@ -118,9 +118,30 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"index.ts":[function(require,module,exports) {
-"use strict"; // Start here
+"use strict";
 
-console.log("Start here!");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var gameOver = false;
+var score = 0;
+
+function setGameOver(view) {
+  view.drawInfo("Game Over!");
+  gameOver = false;
+}
+
+function setGameWin(view) {
+  view.drawInfo("Game Won!");
+  gameOver = false;
+}
+
+function gameLoop(view, bricks, paddle, ball) {}
+
+function startGame(view) {} //Create new view
+
+
+var view = new Ca();
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
