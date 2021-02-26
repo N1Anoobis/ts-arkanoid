@@ -9,9 +9,9 @@ export default {
   },
   mutations: {
     addProductToCart(state, payload) {
-      const productData = payload.product;
+        const productData = payload;
       const productInCartIndex = state.items.findIndex(
-        (ci) => ci.productId === productData.id
+        ci => ci.productId === productData.id
       );
 
       if (productInCartIndex >= 0) {
@@ -22,7 +22,7 @@ export default {
           title: productData.title,
           image: productData.image,
           price: productData.price,
-          qty: 1,
+          qty: 1
         };
         state.items.push(newItem);
       }
@@ -32,17 +32,20 @@ export default {
     removeProductFromCart(state, payload) {
       const prodId = payload.productId;
       const productInCartIndex = state.items.findIndex(
-        (cartItem) => cartItem.productId === prodId
+        cartItem => cartItem.productId === prodId
       );
       const prodData = state.items[productInCartIndex];
       state.items.splice(productInCartIndex, 1);
       state.qty -= prodData.qty;
       state.total -= prodData.price * prodData.qty;
-    },
+    }
   },
   actions: {
     addToCart(context, payload) {
-      context.commit('addProductToCart', payload);
+      const prodId = payload.id;
+      const products = context.rootGetters['prods/products'];
+      const product = products.find(prod => prod.id === prodId);
+      context.commit('addProductToCart', product);
     },
     removeFromCart(context, payload) {
       context.commit('removeProductFromCart', payload);
